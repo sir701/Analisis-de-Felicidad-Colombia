@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia - Índice de Felicidad Mundial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Partículas de fondo sutiles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #2d5a3d;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-particle 25s infinite;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header elegante */
+		header {
+		    text-align: center;
+		    padding: 120px 20px;
+		    background: 
+		        linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(15, 26, 21, 0.95)),
+		        url('https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=1600') center/cover;
+		    border-radius: 25px;
+		    margin-bottom: 40px;
+		    box-shadow: 
+		        0 20px 60px rgba(0, 0, 0, 0.8),
+		        inset 0 -100px 100px rgba(0, 0, 0, 0.4);
+		    position: relative;
+		    overflow: hidden;
+		    border: 3px solid rgba(252, 209, 22, 0.3);
+		}
+		
+		header::before {
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    height: 5px;
+		    background: linear-gradient(90deg, #FCD116, #003893, #CE1126, #FCD116);
+		    background-size: 200% 100%;
+		    animation: shimmer 3s linear infinite;
+		}
+		
+		@keyframes shimmer {
+		    0% { background-position: -200% 0; }
+		    100% { background-position: 200% 0; }
+		}
+		
+		header h1 {
+		    font-size: 3.5em;
+		    margin-bottom: 20px;
+		    color: #ffffff;
+		    font-weight: 900;
+		    text-shadow: 
+		        0 2px 10px rgba(0, 0, 0, 0.8),
+		        0 0 30px rgba(252, 209, 22, 0.3);
+		    letter-spacing: 2px;
+		}
+		
+		.flag {
+		    font-size: 7em;
+		    margin-bottom: 25px;
+		    animation: float 4s ease-in-out infinite, pulse 2s ease-in-out infinite;
+		    filter: drop-shadow(0 0 25px rgba(252, 209, 22, 0.8));
+		}
+		
+		@keyframes float {
+		    0%, 100% { transform: translateY(0px); }
+		    50% { transform: translateY(-20px); }
+		}
+		
+		@keyframes pulse {
+		    0%, 100% { transform: scale(1); }
+		    50% { transform: scale(1.05); }
+		}
+		
+		.subtitle {
+		    font-size: 1.6em;
+		    color: #FCD116;
+		    font-weight: 700;
+		    text-shadow: 
+		        0 3px 10px rgba(0, 0, 0, 0.9),
+		        0 0 20px rgba(252, 209, 22, 0.4);
+		    letter-spacing: 1px;
+		    text-transform: uppercase;
+		}
+        /* Score card refinado */
+        .score-card {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            border: 1px solid rgba(45, 90, 61, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .score-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            border-color: rgba(74, 157, 111, 0.5);
+        }
+
+        .score-number {
+            font-size: 5em;
+            font-weight: 900;
+            color: #4a9d6f;
+            margin: 25px 0;
+            text-shadow: 0 0 20px rgba(74, 157, 111, 0.2);
+        }
+
+        .score-label {
+            font-size: 1.6em;
+            color: #5cb885;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .ranking {
+            font-size: 1.3em;
+            color: #3d7a59;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        /* Grid de variables refinado */
+        .variables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .variable-card {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 90, 61, 0.2);
+            cursor: pointer;
+        }
+
+        .variable-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+            border-color: rgba(74, 157, 111, 0.4);
+        }
+
+        .variable-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            filter: grayscale(30%);
+        }
+
+        .variable-card:hover .variable-image {
+            opacity: 0.7;
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .variable-content {
+            padding: 25px;
+        }
+
+        .variable-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3d7a59, transparent);
+        }
+
+        .variable-icon {
+            font-size: 3em;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .variable-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4a9d6f;
+            margin-bottom: 12px;
+        }
+
+        .variable-value {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #5cb885;
+            margin: 15px 0;
+        }
+
+        .variable-description {
+            color: #a0a0a0;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(45, 90, 61, 0.2);
+            line-height: 1.7;
+        }
+
+        .variable-explanation {
+            background: rgba(45, 90, 61, 0.08);
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            border: 1px solid rgba(45, 90, 61, 0.15);
+        }
+
+        .variable-explanation ul {
+            color: #909090;
+        }
+
+        .variable-explanation li {
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .variable-explanation li:hover {
+            color: #5cb885;
+            transform: translateX(3px);
+        }
+
+        .explanation-title {
+            font-weight: bold;
+            color: #5cb885;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 18px 0;
+            border: 1px solid rgba(45, 90, 61, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2d5a3d, #4a9d6f);
+            border-radius: 5px;
+            transition: width 1.8s ease;
+            box-shadow: 0 0 10px rgba(74, 157, 111, 0.3);
+        }
+
+        .context-section {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(45, 90, 61, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .context-section:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            border-color: rgba(74, 157, 111, 0.3);
+        }
+
+        .context-section h2 {
+            color: #4a9d6f;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+
+        .context-section p {
+            color: #c0c0c0;
+            margin-bottom: 18px;
+            line-height: 1.9;
+        }
+
+        .context-section ul {
+            color: #b0b0b0;
+        }
+
+        .context-section li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            transition: all 0.2s ease;
+        }
+
+        .context-section li:hover {
+            color: #5cb885;
+            transform: translateX(5px);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #2d5a3d, #4a9d6f);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+
+        .image-section {
+            background: linear-gradient(rgba(15, 26, 21, 0.85), rgba(26, 40, 32, 0.85)), 
+                        url('https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=1200') center/cover;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            color: white;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(45, 90, 61, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: #5cb885;
+        }
+
+        .image-section p {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #d0d0d0;
+        }
+
+        .section-title {
+            color: #4a9d6f;
+            text-align: center;
+            margin: 50px 0 35px 0;
+            font-size: 2.5em;
+            font-weight: 900;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: #5cb885;
+            font-size: 1.1em;
+        }
+
+        footer p {
+            margin: 6px 0;
+            opacity: 0.8;
+        }
+
+        /* Botón interactivo refinado */
+        .interactive-btn {
+            background: linear-gradient(135deg, #2d5a3d, #4a9d6f);
+            color: #fff;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(45, 90, 61, 0.3);
+            transition: all 0.3s ease;
+            margin: 18px auto;
+            display: block;
+        }
+
+        .interactive-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(74, 157, 111, 0.4);
+            background: linear-gradient(135deg, #3d7a59, #5cb885);
+        }
+
+        /* Stats cards adicionales */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(45, 90, 61, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 157, 111, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #5cb885;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 0.95em;
+        }
+
+        /* Estilos para comparativas */
+        .comparison-section {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(45, 90, 61, 0.2);
+        }
+
+        .comparison-section h2 {
+            color: #4a9d6f;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-align: center;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .country-card {
+            background: rgba(15, 26, 21, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(45, 90, 61, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 157, 111, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .country-card.highlight-colombia {
+            border: 2px solid #5cb885;
+            background: rgba(45, 90, 61, 0.15);
+        }
+
+        .country-flag {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .country-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #5cb885;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .country-rank {
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .country-score {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #4a9d6f;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .country-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(45, 90, 61, 0.2);
+            font-size: 0.9em;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .comparison-intro {
+            text-align: center;
+            color: #c0c0c0;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .badge-top {
+            background: linear-gradient(135deg, #4a9d6f, #5cb885);
+            color: #fff;
+        }
+
+        .badge-bottom {
+            background: linear-gradient(135deg, #7a3d3d, #9d4a4a);
+            color: #fff;
+        }
+
+        .badge-latam {
+            background: linear-gradient(135deg, #3d5a7a, #4a6f9d);
+            color: #fff;
+        }
+
+        .badge-colombia {
+            background: linear-gradient(135deg, #5a7a3d, #6f9d4a);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .score-number {
+                font-size: 3.5em;
+            }
+
+            .variables-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-section {
+                padding: 30px 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+		/* ========== ESTILOS PARA GRÁFICAS MEJORADOS ========== */
+
+		.chart-section {
+		    background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+		    border-radius: 25px;
+		    padding: 50px 40px;
+		    margin-bottom: 50px;
+		    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+		    border: 2px solid rgba(45, 90, 61, 0.4);
+		    position: relative;
+		    overflow: hidden;
+		    transition: all 0.3s ease;
+		}
+		
+		.chart-section::before {
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    height: 4px;
+		    background: linear-gradient(90deg, #2d5a3d, #4a9d6f, #5cb885, #4a9d6f, #2d5a3d);
+		    background-size: 200% 100%;
+		    animation: shimmer 3s linear infinite;
+		}
+		
+		@keyframes shimmer {
+		    0% { background-position: -200% 0; }
+		    100% { background-position: 200% 0; }
+		}
+		
+		.chart-section:hover {
+		    transform: translateY(-5px);
+		    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+		    border-color: rgba(74, 157, 111, 0.6);
+		}
+		
+		.chart-section h3 {
+		    color: #4a9d6f;
+		    margin-bottom: 30px;
+		    text-align: center;
+		    font-size: 1.8em;
+		    font-weight: 700;
+		    text-shadow: 0 2px 10px rgba(74, 157, 111, 0.3);
+		    position: relative;
+		    padding-bottom: 15px;
+		}
+		
+		.chart-section h3::after {
+		    content: '';
+		    position: absolute;
+		    bottom: 0;
+		    left: 50%;
+		    transform: translateX(-50%);
+		    width: 100px;
+		    height: 3px;
+		    background: linear-gradient(90deg, transparent, #5cb885, transparent);
+		}
+		
+		/* Contenedor de la imagen */
+		.chart-image-container {
+		    text-align: center;
+		    position: relative;
+		    padding: 20px;
+		    background: rgba(0, 0, 0, 0.2);
+		    border-radius: 15px;
+		    transition: all 0.3s ease;
+		}
+		
+		.chart-image-container:hover {
+		    background: rgba(0, 0, 0, 0.3);
+		}
+		
+		/* Estilo de la imagen */
+		.chart-section img {
+		    max-width: 100%;
+		    height: auto;
+		    border-radius: 15px;
+		    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+		    transition: all 0.4s ease;
+		    border: 2px solid rgba(45, 90, 61, 0.3);
+		}
+		
+		.chart-section img:hover {
+		    transform: scale(1.02);
+		    box-shadow: 0 15px 50px rgba(74, 157, 111, 0.4);
+		    border-color: rgba(74, 157, 111, 0.6);
+		}
+		
+		/* Descripción debajo de la gráfica */
+		.chart-description {
+		    color: #a0a0a0;
+		    margin-top: 20px;
+		    font-size: 1em;
+		    line-height: 1.6;
+		    text-align: center;
+		    font-style: italic;
+		    padding: 15px;
+		    background: rgba(45, 90, 61, 0.1);
+		    border-radius: 10px;
+		    border-left: 3px solid #5cb885;
+		}
+		
+		/* Icono decorativo */
+		.chart-icon {
+		    display: inline-block;
+		    font-size: 2em;
+		    margin-right: 10px;
+		    filter: drop-shadow(0 0 10px rgba(74, 157, 111, 0.5));
+		}
+		
+		/* Responsive */
+		@media (max-width: 768px) {
+		    .chart-section {
+		        padding: 30px 20px;
+		    }
+		    
+		    .chart-section h3 {
+		        font-size: 1.4em;
+		    }
+		    
+		    .chart-image-container {
+		        padding: 10px;
+		    }
+		}
+		
+	/* ESTILOS PARA SECCIÓN DE EQUIPO */
+        .team-section {
+            background: linear-gradient(135deg, #1a2820 0%, #0f1a15 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(45, 90, 61, 0.3);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: rgba(15, 26, 21, 0.6);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid rgba(45, 90, 61, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 157, 111, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .member-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(74, 157, 111, 0.3));
+        }
+
+        .member-name {
+            color: #5cb885;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            color: #a0a0a0;
+            font-size: 0.95em;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+		.country-flag img {
+			width: 80px;
+			height: auto;
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+			transition: transform 0.3s ease;
+		}
+
+		.country-flag img:hover {
+			transform: scale(1.15);
+			box-shadow: 0 6px 20px rgba(74, 157, 111, 0.5);
+		}
+	</style>
+</head>
+<body>
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+		<header>
+			<div class="country-flag">
+				<img src="https://flagpedia.net/data/flags/w580/co.webp" alt="Colombia">
+			</div>
+			<h1>Colombia en el Índice Mundial de Felicidad</h1>
+			<p class="subtitle">World Happiness Report 2025</p>
+		</header>
+
+        <div class="score-card">
+            <div class="score-label">Puntuación de Felicidad</div>
+            <div class="score-number" id="mainScore">6.004</div>
+            <div class="ranking">🏆 Ranking Mundial: #61 de 147 países</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%" id="mainProgress"></div>
+            </div>
+            <button class="interactive-btn" onclick="animateAll()">✨ Animar Estadísticas</button>
+        </div>
+
+        <!-- Stats rápidas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">147</div>
+                <div class="stat-label">Países Evaluados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">61°</div>
+                <div class="stat-label">Posición Colombia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6.004</div>
+                <div class="stat-label">Puntuación Total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+15</div>
+                <div class="stat-label">Posicion 2023 vs 2024</div>
+            </div>
+        </div>
+
+        <div class="context-section">
+            <h2>📊 ¿Qué significa esta puntuación?</h2>
+            <p>El Índice de Felicidad es una medida de bienestar basada en encuestas donde las personas evalúan su vida en una escala del 0 al 10. Colombia obtiene una puntuación de <span class="highlight">6.004</span>, ubicándose en el <span class="highlight">puesto 61</span> a nivel mundial.</p>
+            <p>Esta puntuación coloca a Colombia en un nivel <strong>medio-alto</strong> de bienestar, por encima del promedio latinoamericano, pero con margen de mejora en varias áreas clave.</p>
+        </div>
+
+        <!-- COMPARACIÓN CON LOS MÁS FELICES -->
+        <div class="comparison-section">
+            <h2>🌟 Los 3 Países Más Felices del Mundo</h2>
+            <p class="comparison-intro">¿Cómo se compara Colombia con los líderes mundiales en felicidad?</p>
+            <div class="comparison-grid">
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/fi.webp" alt="Finlandia">
+					</div>
+                    <div class="country-name">Finlandia</div>
+                    <div class="country-rank">🥇 Puesto #1</div>
+                    <div class="country-score">7.736</div>
+                    <span class="badge badge-top">Más Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> +1.732 puntos<br>
+                        <strong>Fortalezas:</strong> Alto PIB per cápita, excelente sistema educativo y de salud, baja corrupción, fuerte apoyo social
+                    </div>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/dk.webp" alt="Dinamarca">
+					</div>
+                    <div class="country-name">Dinamarca</div>
+                    <div class="country-rank">🥈 Puesto #2</div>
+                    <div class="country-score">7.521</div>
+                    <span class="badge badge-top">Muy Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> +1.517 puntos<br>
+                        <strong>Fortalezas:</strong> Balance trabajo-vida, igualdad social, confianza en instituciones, alta libertad personal
+                    </div>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/is.webp" alt="Islandia">
+					</div>
+                    <div class="country-name">Islandia</div>
+                    <div class="country-rank">🥉 Puesto #3</div>
+                    <div class="country-score">7.515</div>
+                    <span class="badge badge-top">Muy Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> +1.511 puntos<br>
+                        <strong>Fortalezas:</strong> Baja desigualdad, fuerte cohesión social, excelente calidad de vida, medio ambiente limpio
+                    </div>
+                </div>
+
+                <div class="country-card highlight-colombia">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/co.webp" alt="Colombia">
+					</div>
+                    <div class="country-name">Colombia</div>
+                    <div class="country-rank">🎯 Puesto #61</div>
+                    <div class="country-score">6.004</div>
+                    <span class="badge badge-colombia">Nuestra Posición</span>
+                    <div class="country-info">
+                        <strong>Oportunidades:</strong> Mejorar transparencia institucional, reducir desigualdad económica, fortalecer educación pública
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="chart-section">
+        <h3 style="color: #4a9d6f; margin-bottom: 20px; text-align: center;">📊 Gráfica Comparativa - Países Más Felices</h3>
+        <div style="text-align: center;">
+            <img src="los3paisesfelices.png" alt="Gráfica Países Más Felices" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+            <p style="color: #a0a0a0; margin-top: 15px; font-size: 0.9em;">Comparación visual de Colombia con los países más felices del mundo</p>
+        </div>
+    </div>
+
+        <!-- COMPARACIÓN CON LATINOAMÉRICA -->
+        <div class="comparison-section">
+            <h2>🌎 Colombia vs Otros Países de Latinoamérica</h2>
+            <p class="comparison-intro">Colombia se encuentra en una posición competitiva dentro de la región latinoamericana</p>
+            <div class="comparison-grid">
+                <div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/cr.webp" alt="Costa Rica">
+					</div>
+					<div class="country-name">Costa Rica</div>
+					<div class="country-rank">Puesto #6 Mundial</div>
+					<div class="country-score">7.274</div>
+					<span class="badge badge-latam">#1 Latam</span>
+					<div class="country-info">
+						País más feliz de Latinoamérica, fuerte sistema de salud y estabilidad social.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/mx.webp" alt="México">
+					</div>
+					<div class="country-name">México</div>
+					<div class="country-rank">Puesto #10 Mundial</div>
+					<div class="country-score">6.979</div>
+					<span class="badge badge-latam">#2 Latam</span>
+					<div class="country-info">
+						Alto apoyo social y bienestar percibido, pese a problemas estructurales.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/uy.webp" alt="Uruguay">
+					</div>
+					<div class="country-name">Uruguay</div>
+					<div class="country-rank">Puesto #28 Mundial</div>
+					<div class="country-score">6.661</div>
+					<span class="badge badge-latam">#3 Latam</span>
+					<div class="country-info">
+						Estabilidad democrática y buena calidad institucional.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/br.webp" alt="Brasil">
+					</div>
+					<div class="country-name">Brasil</div>
+					<div class="country-rank">Puesto #36 Mundial</div>
+					<div class="country-score">6.494</div>
+					<span class="badge badge-latam">#4 Latam</span>
+					<div class="country-info">
+						Alto apoyo social, aunque afectado por desigualdad y violencia.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/sv.webp" alt="El Salvador">
+					</div>
+					<div class="country-name">El Salvador</div>
+					<div class="country-rank">Puesto #37 Mundial</div>
+					<div class="country-score">6.492</div>
+					<span class="badge badge-latam">#5 Latam</span>
+					<div class="country-info">
+						Mejora notable en bienestar percibido y seguridad ciudadana.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/pa.webp" alt="Panamá">
+					</div>
+					<div class="country-name">Panamá</div>
+					<div class="country-rank">Puesto #41 Mundial</div>
+					<div class="country-score">6.407</div>
+					<span class="badge badge-latam">#6 Latam</span>
+					<div class="country-info">
+						Buen desempeño económico y estabilidad relativa.
+					</div>
+				</div>
+
+				<div class="country-card">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/ar.webp" alt="Argentina">
+					</div>
+					<div class="country-name">Argentina</div>
+					<div class="country-rank">Puesto #42 Mundial</div>
+					<div class="country-score">6.397</div>
+					<span class="badge badge-latam">#7 Latam</span>
+					<div class="country-info">
+						Bienestar afectado por crisis económica e inflación.
+					</div>
+				</div>
+
+				<div class="country-card highlight-colombia">
+					<div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/co.webp" alt="Colombia">
+					</div>
+					<div class="country-name">Colombia</div>
+					<div class="country-rank">Puesto #61 Mundial</div>
+					<div class="country-score">6.004</div>
+					<span class="badge badge-colombia">#12 Latam</span>
+					<div class="country-info">
+						Buen apoyo social, pero fuera del top 10 regional.
+					</div>
+				</div>
+			</div>
+        </div>
+		
+		<!-- GRÁFICA: COMPARACIÓN LATINOAMÉRICA -->
+			<div class="chart-section">
+				<h3 style="color: #4a9d6f; margin-bottom: 20px; text-align: center;">📊 Gráfica Comparativa - Latinoamérica</h3>
+				<div style="text-align: center;">
+					<img src="latamsinmex.png" alt="Gráfica Latinoamérica" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+					<p style="color: #a0a0a0; margin-top: 15px; font-size: 0.9em;">Posición de Colombia en el ranking latinoamericano de felicidad</p>
+				</div>
+			</div>
+
+        <!-- COMPARACIÓN CON LOS MENOS FELICES -->
+        <div class="comparison-section">
+            <h2>⚠️ Los 3 Países Menos Felices del Mundo</h2>
+            <p class="comparison-intro">Colombia está significativamente mejor que los países con mayores desafíos en bienestar</p>
+            <div class="comparison-grid">
+                <div class="country-card highlight-colombia">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/co.webp" alt="Colombia">
+					</div>
+                    <div class="country-name">Colombia</div>
+                    <div class="country-rank">🎯 Puesto #61</div>
+                    <div class="country-score">6.004</div>
+                    <span class="badge badge-colombia">Nuestra Posición</span>
+                    <div class="country-info">
+                        Colombia supera por mucho a los países menos felices, gracias al apoyo social y libertad personal
+                    </div>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/lb.webp" alt="Líbano">
+					</div>
+                    <div class="country-name">Líbano</div>
+                    <div class="country-rank">Puesto #145</div>
+                    <div class="country-score">3.188</div>
+                    <span class="badge badge-bottom">Menos Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> -2.816 puntos<br>
+                        <strong>Causas:</strong> Crisis económica severa, inestabilidad política, colapso de servicios básicos
+                    </div>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/sl.webp" alt="Sierra Leone">
+					</div>
+                    <div class="country-name">Sierra Leone</div>
+                    <div class="country-rank">Puesto #146</div>
+                    <div class="country-score">2.998</div>
+                    <span class="badge badge-bottom">Menos Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> -3.006 puntos<br>
+                        <strong>Causas:</strong> Pobreza extrema, alta tasa de VIH/SIDA, desempleo masivo, inseguridad alimentaria
+                    </div>
+                </div>
+
+                <div class="country-card">
+                    <div class="country-flag">
+						<img src="https://flagpedia.net/data/flags/w580/af.webp" alt="Afganistán">
+					</div>
+                    <div class="country-name">Afganistán</div>
+                    <div class="country-rank">Puesto #147</div>
+                    <div class="country-score">1.364</div>
+                    <span class="badge badge-bottom">Menos Feliz</span>
+                    <div class="country-info">
+                        <strong>Diferencia con Colombia:</strong> -4.680 puntos<br>
+                        <strong>Causas:</strong> Conflicto armado continuo, crisis humanitaria, falta de libertades básicas, pobreza extrema
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<!-- GRÁFICA: PAÍSES MENOS FELICES -->
+			<div class="chart-section">
+				<h3 style="color: #4a9d6f; margin-bottom: 20px; text-align: center;">📊 Gráfica Comparativa - Países Menos Felices</h3>
+				<div style="text-align: center;">
+					<img src="los3paisesinfelices.png" alt="Gráfica Países Menos Felices" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+					<p style="color: #a0a0a0; margin-top: 15px; font-size: 0.9em;">Diferencia de Colombia con los países con menor índice de felicidad</p>
+			</div>
+		</div>
+
+        <h2 class="section-title">⭐ Factores que Explican la Felicidad en Colombia</h2>
+
+        <div class="variables-grid">
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600" alt="Economía" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">💰</div>
+                    <div class="variable-title">PIB per cápita (Log)</div>
+                    <div class="variable-value">9.502</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="65"></div>
+                    </div>
+                    <div class="variable-description">
+                        Mide el poder adquisitivo y nivel económico promedio de los colombianos.
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Economía diversificada (petróleo, café, turismo)</li>
+                            <li>Crecimiento económico moderado pero estable</li>
+                            <li>Desigualdad en la distribución del ingreso</li>
+                            <li>Mercado laboral con alta informalidad (≈60%)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600" alt="Familia" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">🤝</div>
+                    <div class="variable-title">Apoyo Social</div>
+                    <div class="variable-value">0.881</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="88"></div>
+                    </div>
+                    <div class="variable-description">
+                        Porcentaje de personas que sienten que tienen a alguien en quien confiar en momentos difíciles.
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Cultura familiar fuerte y redes de apoyo</li>
+                            <li>Comunidades unidas y solidarias</li>
+                            <li>Tradición de ayuda entre vecinos</li>
+                            <li>Resiliencia ante adversidades históricas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600" alt="Salud" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">🏥</div>
+                    <div class="variable-title">Esperanza de Vida Saludable</div>
+                    <div class="variable-value">67.3 años</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="73"></div>
+                    </div>
+                    <div class="variable-description">
+                        Años que una persona puede esperar vivir con buena salud.
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Sistema de salud universal pero con desigualdades</li>
+                            <li>Mejoras en atención primaria</li>
+                            <li>Desafíos en zonas rurales y remotas</li>
+                            <li>Enfermedades crónicas en aumento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=600" alt="Libertad" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">🦅</div>
+                    <div class="variable-title">Libertad para Elegir</div>
+                    <div class="variable-value">0.886</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="89"></div>
+                    </div>
+                    <div class="variable-description">
+                        Satisfacción con la libertad personal para tomar decisiones de vida.
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Democracia consolidada</li>
+                            <li>Libertades civiles establecidas</li>
+                            <li>Sociedad pluralista y diversa</li>
+                            <li>Aunque persisten desafíos en seguridad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600" alt="Generosidad" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">🎁</div>
+                    <div class="variable-title">Generosidad</div>
+                    <div class="variable-value">0.098</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="45"></div>
+                    </div>
+                    <div class="variable-description">
+                        Tendencia a donar dinero a causas benéficas (ajustado por PIB).
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Limitaciones económicas familiares</li>
+                            <li>Cultura de ayuda directa vs. donaciones formales</li>
+                            <li>Desconfianza en organizaciones benéficas</li>
+                            <li>Solidaridad informal más común</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variable-card">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600" alt="Justicia" class="variable-image">
+                <div class="variable-content">
+                    <div class="variable-icon">⚖️</div>
+                    <div class="variable-title">Percepción de Corrupción</div>
+                    <div class="variable-value">0.853</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%" data-width="85"></div>
+                    </div>
+                    <div class="variable-description">
+                        Porcentaje de personas que perciben corrupción en gobierno y empresas.
+                    </div>
+                    <div class="variable-explanation">
+                        <div class="explanation-title">🔍 ¿Por qué este valor?</div>
+                        <p><strong>Causas:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Escándalos públicos recurrentes</li>
+                            <li>Desconfianza histórica en instituciones</li>
+                            <li>Percepción de impunidad</li>
+                            <li>Aunque hay esfuerzos de transparencia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-section">
+            <h2>🌟 La Esencia de Colombia</h2>
+            <p>Colombia es un país de contrastes y belleza natural incomparable. Desde las playas del Caribe hasta los paisajes montañosos de los Andes, pasando por la biodiversidad del Amazonas, cada rincón del país ofrece una experiencia única.</p>
+            <p>La calidez de su gente, la riqueza cultural, y la resiliencia histórica hacen de Colombia un país especial en el corazón de América Latina.</p>
+        </div>
+
+        <div class="context-section">
+            <h2>🎯 Conclusiones para Colombia</h2>
+            <p><strong>Fortalezas principales:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>💪 <strong>Apoyo social robusto</strong>: Los colombianos cuentan con redes familiares y comunitarias fuertes</li>
+                <li>🗽 <strong>Alta libertad personal</strong>: Satisfacción con autonomía y derechos individuales</li>
+                <li>😊 <strong>Optimismo cultural</strong>: A pesar de desafíos, mantienen actitud positiva</li>
+                <li>🌎 <strong>Liderazgo regional</strong>: Cuarto país más feliz de Latinoamérica</li>
+            </ul>
+            <br>
+            <p><strong>Áreas de mejora:</strong></p>
+            <ul style="margin-left: 20px;">
+                <li>📉 <strong>Generosidad formal baja</strong>: Necesidad de fortalecer cultura de donación organizada</li>
+                <li>🏛️ <strong>Percepción de corrupción</strong>: Requiere mayor transparencia institucional</li>
+                <li>💼 <strong>Desarrollo económico</strong>: Reducir informalidad y desigualdad</li>
+                <li>🏥 <strong>Acceso equitativo a salud</strong>: Mejorar cobertura en zonas rurales</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>🇨🇴 Datos basados en el World Happiness Report 2025</p>
+            <p>Fuente: Gallup World Poll & Universidad de Columbia</p>
+			
+			<!-- SECCIÓN DE EQUIPO -->
+        <div class="team-section">
+            <h2 style="color: #4a9d6f; text-align: center; margin-bottom: 30px; font-size: 2em;">👥 Equipo de Investigación</h2>
+            <p style="text-align: center; color: #c0c0c0; margin-bottom: 40px; font-size: 1.1em;">
+                Trabajo realizado por:
+            </p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-icon">👨‍🎓</div>
+                    <h3 class="member-name">Julian Andres Benitez Penaloza</h3>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon">👨‍🎓</div>
+                    <h3 class="member-name">Antonio David Vasquez Lora</h3>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon">👨‍🎓</div>
+                    <h3 class="member-name">German Dario Bonilla Rocha</h3>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon">👨‍🎓</div>
+                    <h3 class="member-name">Jose Angel Machacon Blanquicett</h3>
+                </div>
+            </div>
+            
+            <p style="text-align: center; color: #a0a0a0; margin-top: 30px; font-size: 0.95em;">
+                📅 Fecha de presentación: 01/03/2026 <br>
+                🏫 Universidad Tecnologica De Bolívar
+            </p>
+        </div>
+
+        <footer>
+        </footer>
+    </div>
+
+    <script>
+        // Crear partículas de fondo sutiles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 25 + 's';
+                particle.style.animationDuration = (Math.random() * 15 + 20) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animar barras de progreso al cargar
+        window.addEventListener('load', function() {
+            createParticles();
+            
+            setTimeout(() => {
+                document.getElementById('mainProgress').style.width = '62.5%';
+            }, 500);
+
+            const progressBars = document.querySelectorAll('.variable-card .progress-fill');
+            progressBars.forEach((bar, index) => {
+                setTimeout(() => {
+                    const targetWidth = bar.getAttribute('data-width');
+                    bar.style.width = targetWidth + '%';
+                }, 800 + (index * 300));
+            });
+        });
+
+        // Función para reanimar estadísticas
+        function animateAll() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                bar.style.transition = 'none';
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.8s ease';
+                    const targetWidth = bar.getAttribute('data-width') || '62.5';
+                    bar.style.width = targetWidth + '%';
+                }, 50);
+            });
+
+            // Efecto sutil en tarjetas
+            const cards = document.querySelectorAll('.variable-card, .country-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                    }, 200);
+                }, index * 50);
+            });
+        }
+
+        // Efectos hover en tarjetas
+        const cards = document.querySelectorAll('.variable-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'rgba(74, 157, 111, 0.5)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(45, 90, 61, 0.2)';
+            });
+        });
+    </script>
+</body>
+</html>
